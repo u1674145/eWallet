@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">eWallet</string>
+    <string name="welcome_message">Welcome to eWallet. Please use form below to star app, or use Register buttton to create new instance.</string>
+    <string name="login_email">E-mail</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">Log in</string>
+    <string name="register_button">Register</string>
+</resources>
