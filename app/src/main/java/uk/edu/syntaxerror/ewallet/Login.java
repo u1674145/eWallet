@@ -16,7 +16,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
     public void loginAction(View view) {
-        //TODO: login action
+        //TODO: login action to take place
     }
     public  void registerAction(View view) {
         //TODO: register action

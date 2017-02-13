@@ -5,4 +5,8 @@
     <string name="login_password">Password</string>
     <string name="login_button">Log in</string>
     <string name="register_button">Register</string>
+    <string name="Logo_name">Logo</string>
+    <string name="account_number">account number with *</string>
+    <string name="bank_account_name">Bank Account</string>
+    <string name="register_text">Please fill the form to continue.</string>
 </resources>

@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainHub" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".AccountActivity"></activity>
     </application>
 
 </manifest>
