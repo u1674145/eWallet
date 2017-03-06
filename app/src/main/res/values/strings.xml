@@ -9,4 +9,5 @@
     <string name="account_number">account number with *</string>
     <string name="bank_account_name">Bank Account</string>
     <string name="register_text">Please fill the form to continue.</string>
+    <string name="Popup_msg">Inncorect Email or Password</string>
 </resources>
