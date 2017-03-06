@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 public class Login extends AppCompatActivity {
 
     //some random useleess stuff. for now.
     // public final static String LOGIN_DATA = "uk.edu.syntaxerror.ewallet.LOGIN_DATA";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +25,14 @@ public class Login extends AppCompatActivity {
         TextView password_text = (TextView) findViewById(R.id.login_password);
 
         LoginAction login = new LoginAction(email_text.getText().toString(), password_text.getText().toString());
-        if(!login.isValidEmail()) {
-            //TODO: ERRROR msg - not valid Email
-        }else if (!login.isValidPassword()) {
-            //TODO: ERROR msg - not valid password
-        }else {
+        if(login.isValidEmail() && login.isValidPassword()) {
             Intent intent = new Intent(this, MainHub.class);
             intent.putExtra("login", true);
             startActivity(intent);
+        }else {
+            PopupWindow popup = new PopupWindow();
+
+
         }
     }
 
