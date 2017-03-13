@@ -18,9 +18,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login" />
-        <activity android:name=".MainHub" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AccountActivity" />
+        <activity
+            android:name=".MainHub"
+            android:label="@string/title_activity_main_hub"
+            android:parentActivityName=".Login"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.edu.syntaxerror.ewallet.Login" />
+        </activity>
     </application>
 
 </manifest>

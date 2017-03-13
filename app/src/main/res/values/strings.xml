@@ -10,4 +10,10 @@
     <string name="bank_account_name">Bank Account</string>
     <string name="register_text">Please fill the form to continue.</string>
     <string name="Popup_msg">Inncorect Email or Password</string>
+    <string name="input_your_email">input your email</string>
+    <string name="input_your_email_again">input your email again.</string>
+    <string name="set_up_password">set up password</string>
+    <string name="repeat_password">repeat password</string>
+    <string name="title_activity_main_activitytest">MainActivitytest</string>
+    <string name="title_activity_main_hub">MainHub</string>
 </resources>
