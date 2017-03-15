@@ -16,4 +16,7 @@
     <string name="repeat_password">repeat password</string>
     <string name="title_activity_main_activitytest">MainActivitytest</string>
     <string name="title_activity_main_hub">MainHub</string>
+    <string name="accountnumber">Account Number</string>
+    <string name="addCardButton">Add Card</string>
+    <string name="acountname">Name on a Card</string>
 </resources>

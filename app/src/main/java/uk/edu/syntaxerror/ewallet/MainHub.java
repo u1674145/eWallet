@@ -24,6 +24,8 @@ public class MainHub extends Activity {
         //TODO: add saved cards to list;
 
         createArrayAdapter();
+        getStuffFromIntent();
+
     }
 
     private void createArrayAdapter() {
@@ -34,6 +36,10 @@ public class MainHub extends Activity {
     protected void onResume() {
         super.onResume();
 
+        getStuffFromIntent();
+    }
+
+    private void getStuffFromIntent() {
         Bundle stuff = getIntent().getExtras();
         if(stuff != null) {
             Account acc;
@@ -49,6 +55,6 @@ public class MainHub extends Activity {
     public void addCard(View view) {
         Intent intent= new Intent(this,AddCard.class);
         startActivity(intent);
-        onPause();
+        finish();
     }
 }
