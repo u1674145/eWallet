@@ -1,30 +1,54 @@
 package uk.edu.syntaxerror.ewallet;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
-public class MainHub extends AppCompatActivity {
+import java.util.ArrayList;
+
+import static uk.edu.syntaxerror.ewallet.R.layout.activity_main_hub_list;
+
+public class MainHub extends Activity {
+
+    private ArrayList<Account> accounts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_hub);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        accounts = new ArrayList<>();
+
+        //TODO: add saved cards to list;
+
+        createArrayAdapter();
     }
 
+    private void createArrayAdapter() {
+        ArrayAdapter adapter = new ArrayAdapter<Account>(this, R.layout.activity_main_hub_list, accounts);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Bundle stuff = getIntent().getExtras();
+        if(stuff != null) {
+            Account acc;
+            String name = stuff.getString("name");
+            String number = stuff.getString("number");
+
+            acc = new Account(name,number);
+            accounts.add(acc);
+            createArrayAdapter();
+        }
+    }
+
+    public void addCard(View view) {
+        Intent intent= new Intent(this,AddCard.class);
+        startActivity(intent);
+        onPause();
+    }
 }
