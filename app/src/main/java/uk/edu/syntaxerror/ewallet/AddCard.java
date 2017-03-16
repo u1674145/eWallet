@@ -20,28 +20,30 @@ public class AddCard extends AppCompatActivity {
         TextView name = (TextView) findViewById(R.id.accName);
         TextView number = (TextView) findViewById(R.id.accNum);
 
-        Intent intent = new Intent(this,MainHub.class);
-
         String get_name, get_number;
 
         if (name != null || number != null) {
+
             get_name = name.getText().toString();
             get_number = number.getText().toString();
 
-            intent.putExtra("name",get_name);
-            intent.putExtra("number",get_number);
-
+            if(get_name != null || get_number != null) {
+                Intent intent = new Intent(this, MainHub.class);
+                intent.putExtra("name", get_name);
+                intent.putExtra("number", get_number);
+                startActivity(intent);
+                finish();
+            } else {
+                errorPopup();
+            }
         } else {
-            ErrorPopup();
+            errorPopup();
         }
-
-        startActivity(intent);
-        finish();
     }
 
-    private void ErrorPopup() {
+    private void errorPopup() {
         Context context = getApplicationContext();
-        CharSequence text = "Invalid/empty name or number!\n Action Skipped";
+        CharSequence text = "Invalid/empty name or number!";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
