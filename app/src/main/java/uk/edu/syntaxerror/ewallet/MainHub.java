@@ -5,78 +5,132 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import static uk.edu.syntaxerror.ewallet.R.layout.activity_main_hub_list;
 
 public class MainHub extends Activity {
 
-    private ArrayList<Account> accounts = new ArrayList<Account>();
-
+    private ArrayList<Account> accounts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_hub);
 
+        try {
+            readArrayFromFile();
+            readIntent();
+            createArrayAdapter();
+        } catch (Exception e) {
+            e.printStackTrace();
+        //    errorPopup("onCreate exception.");
+        }
 
+    }
 
-        //TODO: add saved cards to list;
+    private void readIntent() {
+        try {
+            Intent i = getIntent();
 
-        createArrayAdapter();
-        getStuffFromIntent();
+            String get_name = i.getStringExtra("name");
+            String get_number = i.getStringExtra("number");
 
+            if(get_name.equals("") || get_number.equals("")) {
+                errorPopup("name or number are empty.");
+                return;
+            }
+
+           accounts.add(new Account(get_name,get_number));
+           writeArrayToFile();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void createArrayAdapter() {
 
-        accounts.add(new Account("Ben", "55554"));
-        accounts.add(new Account("Bob", "99754"));
-
-        CustomCardAdapter adapter = new CustomCardAdapter(this, accounts);
+        final CustomCardAdapter adapter = new CustomCardAdapter(this, accounts);
 
         ListView listView = (ListView) findViewById(R.id.cards_list);
         listView.setAdapter(adapter);
 
-    }
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        getStuffFromIntent();
-    }
+                writeArrayToFile();
+                Intent intent= new Intent(MainHub.this, ShowCard.class);
+                intent.putExtra("data", adapter.getItem(position).toString());
+                startActivity(intent);
 
-    private void getStuffFromIntent() {
-        Bundle stuff = getIntent().getExtras();
-        if(stuff != null) {
-            String name = stuff.getString("name");
-            String number = stuff.getString("number");
-
-            if(name != null || number != null) {
-                accounts.add(new Account(name, number));
             }
-        }
+        });
+
     }
+
 
     public void addCard(View view) {
+        writeArrayToFile();
         Intent intent= new Intent(this,AddCard.class);
         startActivity(intent);
-        finish();
     }
-
 
     private void errorPopup(String texts) {
-        Context context = getApplicationContext();
-        CharSequence text = texts;
-
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast = Toast.makeText(getApplicationContext(), texts, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    private void readArrayFromFile () {
+
+        FileInputStream inputStream;
+
+        try {
+            inputStream = openFileInput("acc.data");
+            InputStreamReader isr = new InputStreamReader(inputStream);
+            BufferedReader br = new BufferedReader(isr);
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String [] arrayline = line.split("=",2);
+                accounts.add(new Account(arrayline[0],arrayline[1]));
+            }
+
+            inputStream.close();
+            br.close();
+            isr.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            errorPopup("cant read data.");
+        }
 
     }
+    private void writeArrayToFile () {
+        String string = "\n";
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = openFileOutput("acc.data", Context.MODE_PRIVATE);
+            outputStream.flush();
+            for (Account a:accounts) {
+                outputStream.write((a.getAccountName()+"=").getBytes());
+                outputStream.write((a.getAccountNum()).getBytes());
+                outputStream.write(string.getBytes());
+            }
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorPopup("error saving.");
+        }
+    }
 }
+

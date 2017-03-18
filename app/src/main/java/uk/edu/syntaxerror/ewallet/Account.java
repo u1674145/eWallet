@@ -1,5 +1,7 @@
 package uk.edu.syntaxerror.ewallet;
 
+import java.util.HashMap;
+
 /**
  * Account Details.
  *
@@ -14,10 +16,10 @@ class Account
 
     @Override
     public String toString() {
-        return "Account{" +
-                "accountName='" + accountName + '\'' +
-                ", accountNum='" + accountNum + '\'' +
-                '}';
+        return "Account:\n" +
+                "Account Name =" + accountName + '\n' +
+                "Account Number =" + accountNum + '\n' +
+                '\n';
     }
 
     // The number of accounts.
@@ -83,5 +85,10 @@ class Account
     public void setBalance(int newBalance)
     {
         balance = newBalance;
+    }
+
+    public void f(HashMap map) {
+        map.put("accountName", accountName);
+        map.put("accountNum", accountNum);
     }
 }

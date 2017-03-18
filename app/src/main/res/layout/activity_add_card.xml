@@ -18,6 +18,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:hint="@string/acountname"
+        android:inputType="textPersonName"
         android:textAlignment="viewStart"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -37,6 +38,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:hint="@string/accountnumber"
+        android:inputType="number"
         android:textAlignment="viewStart"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,14 +52,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:onClick="addCard"
+        android:onClick="addNewCard"
         android:text="@string/addCardButton"
         android:textAlignment="viewStart"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="@+id/accNum"
         app:layout_constraintRight_toRightOf="@+id/accNum"
         app:layout_constraintTop_toBottomOf="@+id/accNum"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
 </android.support.constraint.ConstraintLayout>

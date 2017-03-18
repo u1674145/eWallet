@@ -1,9 +1,8 @@
 package uk.edu.syntaxerror.ewallet;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,39 +15,25 @@ public class AddCard extends AppCompatActivity {
         setContentView(R.layout.activity_add_card);
     }
 
-    public void addCard(View view) {
+    public void addNewCard(View view) {
         TextView name = (TextView) findViewById(R.id.accName);
         TextView number = (TextView) findViewById(R.id.accNum);
 
-        String get_name, get_number;
+        Intent intent = new Intent(this, MainHub.class);
 
-        if (name != null || number != null) {
 
-            get_name = name.getText().toString();
-            get_number = number.getText().toString();
-
-            if(get_name != null || get_number != null) {
-                Intent intent = new Intent(this, MainHub.class);
-                intent.putExtra("name", get_name);
-                intent.putExtra("number", get_number);
-                startActivity(intent);
-                finish();
-            } else {
-                errorPopup();
-            }
-        } else {
-            errorPopup();
+        if(name.getText().toString().equals("") || number.getText().toString().equals("")) {
+            errorPopup("Name or number is empty.");
+            return;
         }
+            intent.putExtra("name", name.getText().toString());
+            intent.putExtra("number", number.getText().toString());
+            startActivity(intent);
     }
 
-    private void errorPopup() {
-        Context context = getApplicationContext();
-        CharSequence text = "Invalid/empty name or number!";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
+    private void errorPopup(String texts) {
+        Toast toast = Toast.makeText(getApplicationContext(), texts, Toast.LENGTH_SHORT);
         toast.show();
-
     }
 
 
