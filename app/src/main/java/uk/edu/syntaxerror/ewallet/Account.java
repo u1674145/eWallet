@@ -1,6 +1,9 @@
 package uk.edu.syntaxerror.ewallet;
 
-import java.util.HashMap;
+import android.annotation.TargetApi;
+import android.os.Build;
+
+import java.util.Random;
 
 /**
  * Account Details.
@@ -13,20 +16,12 @@ class Account
 {
     // The name of the account.
     private String accountName;
-
-    @Override
-    public String toString() {
-        return "Account:\n" +
-                "Account Name =" + accountName + '\n' +
-                "Account Number =" + accountNum + '\n' +
-                '\n';
-    }
-
     // The number of accounts.
     private String accountNum;
     // The balance of the account.
     private double balance;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     Account(String name, String accNum)
     {
         accountName = name;
@@ -34,22 +29,17 @@ class Account
         balance = 0;
     }
 
-    public String getAccountInfo()
-    {
-        return "Account Number: " + accountNum + "\nName of holder: " + accountName + balance +"\nBalance ";
-    }
-
     /**
      * Displays the account number.
      */
-    public String getAccountNum()
+    String getAccountNum()
     {
         return accountNum;
     }
     /**
      * Displays the account number.
      */
-    public String getAccountName()
+     String getAccountName()
     {
         return accountName;
     }
@@ -58,7 +48,7 @@ class Account
      * Returns the balance to the user.
      * @return the balance.
      */
-    public double getBalance()
+     double getBalance()
     {
         return balance;
     }
@@ -66,7 +56,7 @@ class Account
     /**
      * Changes the account Name.
      */
-    public void setAccountName(String newName)
+     void setAccountName(String newName)
     {
         accountName = newName;
     }
@@ -74,7 +64,7 @@ class Account
     /**
      * Changes the account Number.
      */
-    public void setAccountNum(String newNumber)
+     void setAccountNum(String newNumber)
     {
         accountNum = newNumber;
     }
@@ -87,8 +77,16 @@ class Account
         balance = newBalance;
     }
 
-    public void f(HashMap map) {
-        map.put("accountName", accountName);
-        map.put("accountNum", accountNum);
+    @Override
+    public String toString() {
+        return "Account owner :\n" +
+                "  " + accountName + "\n" +
+                "Account number :\n" +
+                "  " + accountNum + "\n" +
+                "\n\nCurrent balance:" +
+                "  " + balance + "\n" +
+                "Balance avaible:" +
+                "  " + balance;
     }
+
 }

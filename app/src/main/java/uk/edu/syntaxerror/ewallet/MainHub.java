@@ -77,7 +77,6 @@ public class MainHub extends Activity {
 
     }
 
-
     public void addCard(View view) {
         writeArrayToFile();
         Intent intent= new Intent(this,AddCard.class);
