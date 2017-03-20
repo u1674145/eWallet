@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +29,7 @@ public class AddCard extends AppCompatActivity {
             return;
         }
 
-     //   progresBar();
+        progresBar();
 
         if(number.length()< 15 || number.length() > 16) {
             errorPopup("Card number seems uncomplete.");
